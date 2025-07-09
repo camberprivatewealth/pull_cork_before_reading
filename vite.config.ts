@@ -3,11 +3,11 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 
 export default defineConfig({
+  base: "/", // ✅ required for Cloudflare Pages
   plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src/components/ui"),
+      "@": path.resolve(__dirname, "src"), // ✅ better aliasing
     },
   },
-  base: "/", // essential for Cloudflare Pages
 });
