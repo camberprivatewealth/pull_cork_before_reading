@@ -57,7 +57,7 @@ export const loadCardsStatic = async (): Promise<Card[]> => {
 // Preload images for better performance
 export const preloadImages = (cards: Card[]): Promise<void[]> => {
   return Promise.all(
-    cards.push({
+    cards.map((card) => {
       return new Promise<void>((resolve, reject) => {
         const img = new Image();
         img.onload = () => resolve();
