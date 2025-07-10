@@ -1,13 +1,14 @@
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import path from "path";
+import tailwind from "tailwindcss";
+import { defineConfig } from "vite";
 
+// https://vite.dev/config/
 export default defineConfig({
-  base: "/", // ✅ required for Cloudflare Pages
   plugins: [react()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "src"), // ✅ better aliasing
+  base: "./",
+  css: {
+    postcss: {
+      plugins: [tailwind()],
     },
   },
 });

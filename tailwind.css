@@ -1,20 +1,23 @@
-@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom component styles */
 @layer components {
   .all-\[unset\] {
     all: unset;
   }
 }
 
-/* Light theme variables */
+:root {
+  --cambercocaebb: rgba(233, 229, 225, 1);
+  --secondaryorange: rgba(212, 98, 53, 1);
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @layer base {
   :root {
-    --cambercocaebb: rgba(233, 229, 225, 1);
-    --secondaryorange: rgba(212, 98, 53, 1);
-
     --background: 0 0% 100%;
     --foreground: 222.2 47.4% 11.2%;
 
@@ -79,9 +82,14 @@
 
     --radius: 0.5rem;
   }
+}
 
+@layer base {
   * {
     @apply border-border;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
   }
 
