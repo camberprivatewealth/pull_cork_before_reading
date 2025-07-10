@@ -29,3 +29,34 @@ If you are satisfied with the result, you can finally build the project for rele
 ```
 npm run build
 ```
+
+## Deployment on Cloudflare Pages
+
+This project is configured for deployment on Cloudflare Pages. To deploy:
+
+### Option 1: Connect Git Repository
+1. Push your code to a Git repository (GitHub, GitLab, etc.)
+2. Go to [Cloudflare Pages](https://pages.cloudflare.com/)
+3. Click "Create a project" and connect your Git repository
+4. Configure the build settings:
+   - **Build command**: `npm run build`
+   - **Build output directory**: `dist`
+   - **Root directory**: `/` (leave empty)
+   - **Node.js version**: `18` or `20`
+
+### Option 2: Direct Upload
+1. Run `npm run build` locally
+2. Go to [Cloudflare Pages](https://pages.cloudflare.com/)
+3. Click "Upload assets" and drag the `dist` folder
+
+### Environment Variables
+If you need to set environment variables for production:
+1. Go to your Cloudflare Pages project dashboard
+2. Navigate to Settings > Environment variables
+3. Add any required variables (like `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`)
+
+### Custom Domain
+To use a custom domain:
+1. Go to your Cloudflare Pages project dashboard
+2. Navigate to Custom domains
+3. Add your domain and follow the DNS configuration instructions
