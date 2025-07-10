@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Card as CardUI, CardContent } from "../../components/ui/card";
 import { Card } from "../../types/cards";
-import { loadCards } from "../../utils/loadCards";
+import { loadCards, loadCardsStatic, preloadImages } from "../../utils/loadCards";
 import confetti from 'canvas-confetti';
-import cork from '../../assets/cork.svg';
-import camberLogo from '../../assets/camber-logo-bone.png';
+
+// Import assets statically for better reliability
+import camberLogoUrl from '../../assets/camber-logo-bone.png';
+import corkUrl from '../../assets/cork.svg';
 
 export const GameScreen = (): JSX.Element => {
   const [cards, setCards] = useState<Card[]>([]);
@@ -16,8 +18,22 @@ export const GameScreen = (): JSX.Element => {
   useEffect(() => {
     const initializeCards = async () => {
       try {
-        const loadedCards = await loadCards();
+        // Try static loading first, fallback to dynamic loading
+        let loadedCards: Card[];
+        try {
+          loadedCards = await loadCardsStatic();
+        } catch (error) {
+          console.warn('Static loading failed, trying dynamic loading:', error);
+          loadedCards = await loadCards();
+        }
+        
         setCards(loadedCards);
+        
+        // Preload images for better performance
+        preloadImages(loadedCards).catch(error => {
+          console.warn('Some images failed to preload:', error);
+        });
+        
         setIsLoading(false);
       } catch (error) {
         console.error('Error loading cards:', error);
@@ -149,9 +165,13 @@ export const GameScreen = (): JSX.Element => {
       {/* Camber Logo */}
       <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
         <img 
-          src={camberLogo} 
+          src={camberLogoUrl} 
           alt="Camber"
           className="w-[80px]"
+          onError={(e) => {
+            console.error('Failed to load Camber logo');
+            e.currentTarget.style.display = 'none';
+          }}
         />
       </div>
 
@@ -242,9 +262,13 @@ export const GameScreen = (): JSX.Element => {
                 className="transition-all duration-300 hover:scale-110"
               >
                 <img 
-                  src={cork}
+                  src={corkUrl}
                   alt="Cork"
                   className="w-[40px] md:w-[60px] lg:w-[80px] opacity-30 hover:opacity-100 transition-all duration-300"
+                  onError={(e) => {
+                    console.error('Failed to load cork image');
+                    e.currentTarget.style.display = 'none';
+                  }}
                 />
               </button>
             </div>

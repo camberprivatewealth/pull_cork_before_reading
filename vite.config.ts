@@ -6,6 +6,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   plugins: [react()],
   base: "/",
+  assetsInclude: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.svg'],
   css: {
     postcss: {
       plugins: [tailwind()],
@@ -15,6 +16,7 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: false,
+    copyPublicDir: true,
     rollupOptions: {
       output: {
         manualChunks: {
