@@ -111,18 +111,19 @@ Once changes are pushed to the `main` branch, Cloudflare will rebuild and deploy
 
 ## Updating Cards
 
-The visual cards in the game are created in Adobe InDesign and exported as individual .png files. There are currently 49 cards in the deck.
+The visual cards in the game are created in Adobe InDesign and exported as individual `.png` files. There are currently 49 cards in the deck.
 
 To update the cards:
-	1.	Open the InDesign file and export all card designs using the naming convention pcbr_#.png (e.g. pcbr_1.png, pcbr_2.png, etc.).
-	2.	Save the exported files into the project directory:
-/src/assets/cards
-	3.	If replacing the existing 49 cards, overwrite the files directly using the same names.
-	4.	If you’re adding or removing cards (i.e. changing the total count), you must update the loadCards.ts file in /src/lib.
-	•	Inside that file, update the card count in the loop or array length to reflect the new total (e.g., change 49 to 60).
-	5.	Push your changes to the main branch. Cloudflare will handle the deployment automatically.
 
-Important: Card updates are not handled through a CMS — this is a static app. Every card update requires re-exporting assets and pushing to the GitHub repo.
+1. Open the InDesign file and export all card designs using the naming convention `pcbr_#.png` (e.g. `pcbr_1.png`, `pcbr_2.png`, etc.).
+2. Save the exported files into the project directory:  
+   `/src/assets/cards`
+3. If replacing the existing 49 cards, overwrite the files directly using the same names.
+4. If you’re adding or removing cards (i.e. changing the total count), you must update the `loadCards.ts` file in `/src/lib`.
+   - Inside that file, update the card count in the loop or array length to reflect the new total (e.g., change `49` to `60`).
+5. Push your changes to the `main` branch. Cloudflare will handle the deployment automatically.
+
+> Important: Card updates are not handled through a CMS — this is a static app. Every card update requires re-exporting assets and pushing to the GitHub repo.
 
 ---
 
